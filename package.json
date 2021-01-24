@@ -1,0 +1,14 @@
+{
+  "name": "code_2",
+  "version": "1.0.0",
+  "description": "Your Figma plugin",
+  "main": "code.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "typescript": "^4.1.3"
+  }
+}

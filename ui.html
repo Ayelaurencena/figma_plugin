@@ -1,0 +1,82 @@
+
+
+<style>
+
+
+.textarea {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    resize: both;
+    min-height: 40px;
+    line-height: 20px;
+  }
+  
+  .textarea[contenteditable]:empty::before {
+    content: "Placeholder still possible";
+    color: gray;
+  }
+
+</style>
+
+
+<!-- 
+  <h2>Rectangle Creator</h2>
+<p>Count: <input id="count" value="5"></p>
+<button id="create">Create</button>
+<button id="cancel">Cancel</button>
+
+-->
+
+
+  <h2>Code Snnipet Creator</h2>
+  <p>Code snnipet: <input id="code" value="insert the code"></p>
+  <button id="create_snnipet">Create</button>
+  <button id="cancel_snnipet">Cancel</button>
+
+
+
+
+<script>
+
+document.getElementById('create_snnipet').onclick = () => {
+  const textbox = document.getElementById('code');
+  const textValue = textbox.value;
+  parent.postMessage({ pluginMessage: { type: 'create-snnipet', textValue} }, '*')
+}
+
+
+
+
+document.getElementById('cancel').onclick = () => {
+  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+}
+
+// Dealing with Textarea Height
+function calcHeight(value) {
+  let numberOfLineBreaks = (value.match(/\n/g) || []).length;
+  // min-height + lines x line-height + padding + border
+  let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;
+  return newHeight;
+}
+
+let textarea = document.querySelector(".resize-ta");
+textarea.addEventListener("keyup", () => {
+  textarea.style.height = calcHeight(textarea.value) + "px";
+});
+
+
+</script>
+
+// ------------- ORIGINAL ------------ //
+document.getElementById('create').onclick = () => {
+  const textbox = document.getElementById('count');
+  const count = parseInt(textbox.value, 10);
+  parent.postMessage({ pluginMessage: { type: 'create-rectangles', count } }, '*')
+}
+
+document.getElementById('cancel').onclick = () => {
+  parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+}
+
+
